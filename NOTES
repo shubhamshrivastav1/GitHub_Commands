@@ -1,0 +1,1872 @@
+Bilkul 👍 Maine tumhare diye hue Git notes ko **simple English, easy-to-remember format** me organize kar diya hai. Maine unnecessary complexity hata kar **beginner → interview-ready** flow rakha hai.
+
+# Git & GitHub — Easy Notes
+
+## 1. What is Git?
+
+**Git = Version Control System**
+
+It helps you:
+
+* Track code changes
+* Save project versions
+* Create branches
+* Work with a team
+* Go back to older versions
+
+👉 **Easy definition:**
+**Git helps us track and manage changes in a project.**
+
+---
+
+# 2. Git Installation
+
+Check Git:
+
+```bash
+git --version
+```
+
+👉 Shows the installed Git version.
+
+---
+
+# 3. Git Configuration
+
+Git needs to know **who is making the commit**.
+
+### Set name
+
+```bash
+git config --global user.name "Your Name"
+```
+
+### Check name
+
+```bash
+git config --global user.name
+```
+
+### Set email
+
+```bash
+git config --global user.email "your@email.com"
+```
+
+### Check email
+
+```bash
+git config --global user.email
+```
+
+👉 **Easy memory:**
+`user.name` → Who am I?
+`user.email` → My email?
+
+---
+
+## Extra Configuration
+
+### Set VS Code as Git editor
+
+```bash
+git config --global core.editor "code --wait"
+```
+
+👉 **Meaning:** Use VS Code when Git needs an editor.
+
+### Handle line endings
+
+```bash
+git config --global core.autocrlf "input"
+```
+
+👉 **Meaning:** Helps handle Windows/Linux line-ending differences.
+
+---
+
+# 4. Create Git Repository
+
+Go inside your project:
+
+```bash
+cd my-project
+```
+
+Then:
+
+```bash
+git init
+```
+
+👉 **Easy memory:**
+`git init` = **Start Git in this project**
+
+---
+
+# 5. Git Status
+
+```bash
+git status
+```
+
+Shows:
+
+* Current branch
+* Modified files
+* Untracked files
+* Staged files
+* Uncommitted changes
+
+👉 **Easy memory:**
+**`git status` = What is happening in my project?**
+
+💡 If confused, run:
+
+```bash
+git status
+```
+
+---
+
+# 6. Git File Flow ⭐
+
+The most important basic flow:
+
+```text
+File
+ ↓
+git add
+ ↓
+Staging Area
+ ↓
+git commit
+ ↓
+Git History
+```
+
+### Remember:
+
+**ADD → STAGE → COMMIT → SAVE**
+
+---
+
+# 7. Git Add
+
+### Add one file
+
+```bash
+git add file.txt
+```
+
+### Add all changed files
+
+```bash
+git add .
+```
+
+👉 **Meaning:** Prepare changes for commit.
+
+**`git add` = Prepare**
+
+---
+
+# 8. Git Commit
+
+```bash
+git commit -m "Add footer"
+```
+
+A commit is a **saved checkpoint** of your project.
+
+Example:
+
+```bash
+git add .
+git commit -m "Add footer"
+```
+
+👉 **Easy memory:**
+**Commit = Save checkpoint**
+
+Good commit messages:
+
+```text
+Add login page
+Fix navbar bug
+Add footer
+Update README
+Fix database connection
+```
+
+---
+
+# 9. Git Log
+
+See commit history:
+
+```bash
+git log
+```
+
+Short version:
+
+```bash
+git log --oneline
+```
+
+👉 **Easy memory:**
+**`git log` = See history**
+
+---
+
+# 10. Git Log Graph ⭐
+
+```bash
+git log --oneline --graph --all
+```
+
+* `--oneline` → Short commit history
+* `--graph` → Show branches visually
+* `--all` → Show all branches
+
+👉 **Easy memory:**
+
+**LOG = History**
+**GRAPH = Branch map**
+
+---
+
+# 11. What is a Branch?
+
+A branch is a **separate line of development**.
+
+Example:
+
+```text
+main
+feature/login
+feature/footer
+feature/payment
+bugfix/navbar
+```
+
+👉 **Easy definition:**
+**Branch = Separate place to work without directly disturbing main code.**
+
+---
+
+# 12. Check Branches
+
+```bash
+git branch
+```
+
+Example:
+
+```text
+* main
+  feature/login
+  feature/footer
+```
+
+`*` = Current branch.
+
+---
+
+# 13. Create Branch
+
+```bash
+git branch feature/navbar
+```
+
+👉 Creates the branch.
+
+⚠️ It **does not switch** to the new branch.
+
+---
+
+# 14. Switch Branch
+
+```bash
+git switch feature/navbar
+```
+
+👉 Move to another branch.
+
+Go back:
+
+```bash
+git switch main
+```
+
+---
+
+# 15. Create + Switch
+
+```bash
+git switch -c feature/navbar
+```
+
+👉 Creates the branch **and immediately switches to it.**
+
+Remember:
+
+**`-c` = Create + Switch**
+
+---
+
+# 16. `git switch -C`
+
+```bash
+git switch -C feature/add-footer
+```
+
+👉 Creates/switches to the branch, and if that branch already exists, `-C` can reset it to the current starting point.
+
+⚠️ Use `-C` carefully.
+
+---
+
+# 17. Good Branch Names
+
+Good:
+
+```text
+feature/login
+feature/signup
+feature/add-footer
+feature/payment
+bugfix/navbar
+bugfix/login-error
+```
+
+Avoid:
+
+```text
+abc
+test123
+mybranch
+newbranch2
+```
+
+👉 **Use names that explain the work.**
+
+---
+
+# 18. Git Merge ⭐
+
+Merge = **Combine changes from one branch into another.**
+
+Example:
+
+```bash
+git switch main
+git merge feature/navbar
+```
+
+Important rule:
+
+> First switch to the branch that should RECEIVE the changes.
+
+👉 **Easy memory:**
+**MERGE = Combine**
+
+---
+
+# 19. Fast-Forward Merge
+
+If `main` has no new work after the feature branch was created, Git can simply move the branch pointer forward.
+
+```text
+A --- B --- C
+            ↑
+         feature
+```
+
+👉 **Easy memory:**
+
+**No separate main work → pointer moves forward → Fast-forward**
+
+No extra merge commit is required.
+
+---
+
+# 20. Three-Way Merge
+
+When both branches have their own commits, Git compares **three points**:
+
+1. Common ancestor
+2. Current branch
+3. Other branch
+
+👉 **Easy memory:**
+
+**2 branches + 1 common ancestor = Three-way merge**
+
+---
+
+# 21. Merge Conflict ⭐
+
+A conflict happens when Git **cannot decide which change to keep**.
+
+Example:
+
+```text
+Branch A → Hello
+Branch B → Hello World
+```
+
+If both changed the same line, Git may ask you to choose.
+
+### Usually you get:
+
+**Current Change** → Keep your change
+
+**Incoming Change** → Keep other branch's change
+
+**Both Changes** → Keep both
+
+👉 Easy memory:
+
+**Current = Mine**
+**Incoming = Theirs**
+**Both = Both**
+
+### Conflict process
+
+```text
+Merge
+ ↓
+Conflict
+ ↓
+Open file
+ ↓
+Fix code
+ ↓
+Save
+ ↓
+git add .
+ ↓
+git commit
+```
+
+👉 **Conflict = Git doesn't know which change to keep.**
+
+---
+
+# 22. Squash Merge
+
+Suppose you have:
+
+```text
+Commit 1
+Commit 2
+Commit 3
+Commit 4
+```
+
+Squash combines them into:
+
+```text
+One clean commit
+```
+
+👉 **Easy memory:**
+
+**Squash = Many commits → One clean commit**
+
+---
+
+# 23. Git Rebase
+
+Example:
+
+```bash
+git switch feature
+git rebase main
+```
+
+Rebase puts your feature commits **on top of the latest main branch**.
+
+👉 **Easy memory:**
+
+**Merge = Join branches**
+**Rebase = Move my work on top**
+
+⚠️ Rebase can rewrite commit history, so use it carefully on shared branches.
+
+---
+
+# 24. Merge vs Rebase
+
+| Merge                            | Rebase                  |
+| -------------------------------- | ----------------------- |
+| Joins histories                  | Replays commits         |
+| Can create merge commit          | Usually cleaner history |
+| Doesn't rewrite existing commits | Can rewrite history     |
+| Beginner-friendly                | Needs more care         |
+
+👉 Remember:
+
+**Merge = Join**
+**Rebase = Move on top**
+
+---
+
+# 25. Git Stash ⭐
+
+Suppose you're working on something but it's **not finished**.
+
+Suddenly, you need to switch branches.
+
+Use:
+
+```bash
+git stash
+```
+
+👉 Temporarily keeps your unfinished changes aside.
+
+Then:
+
+```bash
+git switch main
+```
+
+After your other work:
+
+```bash
+git switch feature/navbar
+```
+
+Bring changes back:
+
+```bash
+git stash pop
+```
+
+👉 **Easy memory:**
+
+**stash = Keep changes aside 📦**
+**pop = Bring changes back 🔄**
+
+---
+
+# 26. `git stash apply`
+
+```bash
+git stash apply
+```
+
+👉 Brings stashed changes back.
+
+**Important:** The stash is **not deleted**.
+
+Compare:
+
+```text
+git stash
+     ↓
+Save aside
+
+git stash apply
+     ↓
+Bring back
+     ↓
+Stash still exists
+```
+
+---
+
+# 27. `git stash clear`
+
+```bash
+git stash clear
+```
+
+👉 Deletes **all saved stash entries**.
+
+Important:
+
+If you already did:
+
+```bash
+git stash apply
+```
+
+and then:
+
+```bash
+git stash clear
+```
+
+the **applied working changes are NOT deleted**.
+
+`stash clear` only deletes the saved stash copies.
+
+---
+
+# 28. Git Remote
+
+A remote is the connection between your local Git repository and an online repository such as GitHub.
+
+Check:
+
+```bash
+git remote -v
+```
+
+Usually the remote is called:
+
+```text
+origin
+```
+
+👉 **Easy memory:**
+**Remote = Online repository connection**
+
+---
+
+# 29. Git Clone
+
+Copy an existing GitHub repository to your computer:
+
+```bash
+git clone <repository-url>
+```
+
+👉 **Easy memory:**
+
+**Clone = GitHub → Computer**
+
+---
+
+# 30. Git Push ⭐
+
+Push sends your local commits to the remote repository.
+
+```bash
+git push
+```
+
+For the first push of a branch:
+
+```bash
+git push -u origin main
+```
+
+### What is `-u`?
+
+`-u` = **Set upstream/link the local branch with the remote branch.**
+
+So:
+
+```bash
+git push -u origin main
+```
+
+means:
+
+**Local main → GitHub main + create the tracking link**
+
+After that, you can simply use:
+
+```bash
+git push
+```
+
+You can also use:
+
+```bash
+git push origin main
+```
+
+👉 **Easy memory:**
+
+**PUSH = Local → GitHub**
+
+---
+
+# 31. Git Fetch ⭐
+
+```bash
+git fetch
+```
+
+Gets the latest information from the remote repository.
+
+But it **doesn't automatically merge those changes into your current branch.**
+
+👉 **Easy memory:**
+
+**FETCH = Check/Get remote updates 👀**
+
+---
+
+# 32. Git Pull ⭐
+
+```bash
+git pull
+```
+
+Gets remote changes and integrates them into your current branch.
+
+Simple idea:
+
+```text
+git pull
+   ≈
+git fetch + integration
+```
+
+👉 **Easy memory:**
+
+**PULL = Get + Integrate**
+
+---
+
+# 33. Fetch vs Pull vs Push ⭐⭐⭐
+
+| Command     | Direction               | Meaning                |
+| ----------- | ----------------------- | ---------------------- |
+| `git fetch` | GitHub → Local Git data | Get remote information |
+| `git pull`  | GitHub → Local branch   | Get + integrate        |
+| `git push`  | Local → GitHub          | Send commits           |
+
+### Super Easy Memory
+
+```text
+FETCH = Get information 👀
+PULL  = Get + Integrate 📥
+PUSH  = Send changes 📤
+```
+
+---
+
+# 34. Fetch + Manual Merge
+
+If you want more control:
+
+```bash
+git fetch origin
+```
+
+Check:
+
+```bash
+git log --oneline --graph --all
+```
+
+Then merge:
+
+```bash
+git merge origin/main
+```
+
+Flow:
+
+```text
+FETCH
+  ↓
+CHECK
+  ↓
+MERGE
+```
+
+---
+
+# 35. Git Revert
+
+Undo a previous commit:
+
+```bash
+git revert <commit-id>
+```
+
+Revert creates a **new commit** that reverses the old commit's changes.
+
+👉 **Easy memory:**
+
+**Revert = Undo safely with a new commit**
+
+---
+
+# 36. Git Reset
+
+Reset moves the current branch/HEAD to another commit.
+
+### Soft
+
+```bash
+git reset --soft HEAD~1
+```
+
+### Mixed
+
+```bash
+git reset --mixed HEAD~1
+```
+
+### Hard
+
+```bash
+git reset --hard HEAD~1
+```
+
+⚠️ `--hard` can remove uncommitted changes.
+
+👉 Easy memory:
+
+**Revert = Undo with new commit**
+**Reset = Move history back**
+
+---
+
+# 37. Delete Branch
+
+Normal delete:
+
+```bash
+git branch -d feature/navbar
+```
+
+👉 `-d` = Delete
+
+Force delete:
+
+```bash
+git branch -D feature/navbar
+```
+
+👉 `-D` = Force delete
+
+⚠️ Use `-D` carefully because it can delete unmerged work.
+
+---
+
+# 38. Complete Beginner Workflow ⭐⭐⭐
+
+Imagine you're adding a footer.
+
+### 1. Start Git
+
+```bash
+git init
+```
+
+### 2. Check
+
+```bash
+git status
+```
+
+### 3. Add
+
+```bash
+git add .
+```
+
+### 4. Commit
+
+```bash
+git commit -m "Initial commit"
+```
+
+### 5. Create feature branch
+
+```bash
+git switch -c feature/add-footer
+```
+
+### 6. Write your code
+
+Add the footer.
+
+### 7. Check
+
+```bash
+git status
+```
+
+### 8. Add
+
+```bash
+git add .
+```
+
+### 9. Commit
+
+```bash
+git commit -m "Add footer"
+```
+
+### 10. Push feature
+
+```bash
+git push -u origin feature/add-footer
+```
+
+### 11. Go to main
+
+```bash
+git switch main
+```
+
+### 12. Get latest main
+
+```bash
+git pull
+```
+
+### 13. Merge feature
+
+```bash
+git merge feature/add-footer
+```
+
+### 14. Push main
+
+```bash
+git push
+```
+
+### 15. Delete feature branch
+
+```bash
+git branch -d feature/add-footer
+```
+
+---
+
+# 39. Most Important Commands ⭐
+
+If you're a beginner, **first master these**:
+
+### Daily commands
+
+```bash
+git status
+git add .
+git commit -m "message"
+git pull
+git push
+```
+
+### Branch commands
+
+```bash
+git branch
+git switch main
+git switch -c feature/name
+git merge feature/name
+```
+
+### Remote commands
+
+```bash
+git fetch
+git pull
+git push
+```
+
+### History
+
+```bash
+git log
+git log --oneline
+git log --oneline --graph --all
+```
+
+### Temporary work
+
+```bash
+git stash
+git stash pop
+git stash apply
+git stash clear
+```
+
+---
+
+# 40. One-Line Interview Definitions
+
+**Git:**
+
+> Git is a version control system used to track and manage code changes.
+
+**Commit:**
+
+> A commit is a saved checkpoint of changes.
+
+**Branch:**
+
+> A branch is a separate line of development.
+
+**Merge:**
+
+> Merge combines changes from one branch into another.
+
+**GitHub:**
+
+> GitHub is a platform for hosting Git repositories and collaborating with developers.
+
+**Fetch:**
+
+> Fetch gets remote information without automatically merging it.
+
+**Pull:**
+
+> Pull gets remote changes and integrates them into the current branch.
+
+**Push:**
+
+> Push sends local commits to the remote repository.
+
+**Stash:**
+
+> Stash temporarily stores unfinished changes.
+
+**Conflict:**
+
+> A conflict happens when Git cannot automatically decide which change to keep.
+
+**Revert:**
+
+> Revert undoes a commit by creating a new commit.
+
+**Reset:**
+
+> Reset moves the current history position to another commit.
+
+---
+
+# 🧠 FINAL MEMORY TRICK
+
+Just remember these words:
+
+```text
+STATUS  → What changed?
+ADD     → Prepare
+COMMIT  → Save
+BRANCH  → Separate work
+SWITCH  → Change branch
+MERGE   → Combine
+REBASE  → Move work on top
+STASH   → Keep unfinished work aside
+FETCH   → Get remote information
+PULL    → Get + integrate
+PUSH    → Send to GitHub
+REVERT  → Undo safely
+RESET   → Move history
+LOG     → See history
+```
+
+## ⭐ The Most Important Flow
+
+```text
+WRITE CODE
+    ↓
+git status
+    ↓
+git add .
+    ↓
+git commit
+    ↓
+git push
+    ↓
+GITHUB
+```
+
+### One-line super memory:
+
+> **Git = Track → Save → Branch → Merge → Share** 🚀
+
+
+ALL COMONDS IN ONE PLACES----------------------------------------------------------
+
+
+Bilkul. Tumhare notes ke basis par **saari important Git commands + unka use** ekdum simple English me, easy-to-remember format me:
+
+# Git Commands & Uses — Easy Cheat Sheet
+
+## 1. Git Version
+
+```bash
+git --version
+```
+
+**Use:** Check if Git is installed.
+
+🧠 **Remember:** `version = Git installed?`
+
+---
+
+# 2. Git Configuration
+
+### Set name
+
+```bash
+git config --global user.name "Your Name"
+```
+
+**Use:** Set your name for Git commits.
+
+### Check name
+
+```bash
+git config --global user.name
+```
+
+**Use:** Check your Git name.
+
+### Set email
+
+```bash
+git config --global user.email "your@email.com"
+```
+
+**Use:** Set your email for Git commits.
+
+### Check email
+
+```bash
+git config --global user.email
+```
+
+**Use:** Check your Git email.
+
+### Set VS Code as editor
+
+```bash
+git config --global core.editor "code --wait"
+```
+
+**Use:** Use VS Code when Git needs an editor.
+
+### Handle line endings
+
+```bash
+git config --global core.autocrlf "input"
+```
+
+**Use:** Handle line-ending differences.
+
+🧠 **Remember:**
+`git config` = **Git settings**
+
+---
+
+# 3. Start Git
+
+```bash
+git init
+```
+
+**Use:** Turn a normal project folder into a Git repository.
+
+🧠 **Remember:**
+`init = Start Git`
+
+---
+
+# 4. Check Project Status
+
+```bash
+git status
+```
+
+**Use:** See what is happening in your project.
+
+It shows:
+
+* Modified files
+* Untracked files
+* Staged files
+* Current branch
+
+🧠 **Remember:**
+`status = What changed?`
+
+---
+
+# 5. Add Files
+
+### Add one file
+
+```bash
+git add file.txt
+```
+
+**Use:** Add one file to the staging area.
+
+### Add all files
+
+```bash
+git add .
+```
+
+**Use:** Add all changed files to staging.
+
+🧠 **Remember:**
+`add = Prepare for commit`
+
+---
+
+# 6. Commit
+
+```bash
+git commit -m "Add login page"
+```
+
+**Use:** Save your staged changes as a checkpoint.
+
+🧠 **Remember:**
+`commit = Save checkpoint`
+
+---
+
+# 7. See History
+
+### Full history
+
+```bash
+git log
+```
+
+**Use:** See commit history.
+
+### Short history
+
+```bash
+git log --oneline
+```
+
+**Use:** See commits in one-line format.
+
+### History with branch graph
+
+```bash
+git log --oneline --graph --all
+```
+
+**Use:** See commits and branches visually.
+
+🧠 **Remember:**
+`log = History`
+`graph = Branch map`
+
+---
+
+# 8. Branch Commands
+
+### See branches
+
+```bash
+git branch
+```
+
+**Use:** Show local branches.
+
+---
+
+### Create branch
+
+```bash
+git branch feature/navbar
+```
+
+**Use:** Create a new branch.
+
+⚠️ It does **not** switch to it.
+
+---
+
+### Switch branch
+
+```bash
+git switch feature/navbar
+```
+
+**Use:** Move to another branch.
+
+---
+
+### Create + switch
+
+```bash
+git switch -c feature/navbar
+```
+
+**Use:** Create a new branch and immediately switch to it.
+
+🧠 **Remember:**
+`-c = Create`
+
+---
+
+### Create/switch with `-C`
+
+```bash
+git switch -C feature/navbar
+```
+
+**Use:** Create/switch to the branch; if it already exists, reset it to the current starting point.
+
+⚠️ Use carefully.
+
+---
+
+# 9. Merge
+
+```bash
+git switch main
+git merge feature/navbar
+```
+
+**Use:** Bring changes from `feature/navbar` into `main`.
+
+🧠 **Remember:**
+`merge = Combine`
+
+### Important rule
+
+**First switch to the branch that should RECEIVE the changes.**
+
+```text
+feature/navbar
+      ↓
+    merge
+      ↓
+     main
+```
+
+---
+
+# 10. Fast-Forward Merge
+
+**Use:** When the current branch has no separate new commits, Git can simply move the branch pointer forward.
+
+🧠 **Remember:**
+
+**No extra work → Pointer moves forward → Fast-forward**
+
+---
+
+# 11. Three-Way Merge
+
+**Use:** When both branches have their own commits.
+
+Git compares:
+
+1. Common ancestor
+2. Current branch
+3. Other branch
+
+🧠 **Remember:**
+
+**2 branches + 1 common ancestor = Three-way merge**
+
+---
+
+# 12. Merge Conflict
+
+A conflict happens when Git **cannot decide which change to keep**.
+
+Usually happens when two branches change the same line.
+
+Options in VS Code:
+
+* **Accept Current Change** → Keep your change
+* **Accept Incoming Change** → Keep other branch's change
+* **Accept Both Changes** → Keep both
+
+After fixing:
+
+```bash
+git add .
+git commit -m "Resolve merge conflict"
+```
+
+🧠 **Remember:**
+
+**Current = Mine**
+**Incoming = Theirs**
+**Both = Both**
+
+---
+
+# 13. Squash
+
+**Squash = Combine many commits into one clean commit.**
+
+Example:
+
+```text
+Commit 1
+Commit 2
+Commit 3
+Commit 4
+      ↓
+One clean commit
+```
+
+🧠 **Remember:**
+**Many → One**
+
+---
+
+# 14. Rebase
+
+```bash
+git switch feature
+git rebase main
+```
+
+**Use:** Put your feature commits on top of the latest `main`.
+
+🧠 **Remember:**
+
+**Merge = Join**
+**Rebase = Move my work on top**
+
+---
+
+# 15. Stash
+
+```bash
+git stash
+```
+
+**Use:** Temporarily save unfinished changes.
+
+Example:
+
+```text
+Working on feature
+       ↓
+git stash
+       ↓
+Changes kept aside
+       ↓
+Switch branch
+```
+
+🧠 **Remember:**
+`stash = Keep unfinished work aside`
+
+---
+
+# 16. Stash Pop
+
+```bash
+git stash pop
+```
+
+**Use:** Bring stashed changes back and remove that stash entry.
+
+🧠 **Remember:**
+`pop = Bring back + remove stash`
+
+---
+
+# 17. Stash Apply
+
+```bash
+git stash apply
+```
+
+**Use:** Bring stashed changes back **without deleting the stash entry**.
+
+🧠 **Remember:**
+`apply = Bring back, keep stash`
+
+---
+
+# 18. Stash Clear
+
+```bash
+git stash clear
+```
+
+**Use:** Delete **all stash entries**.
+
+⚠️ It does not delete changes that you already applied to your working directory.
+
+🧠 **Remember:**
+`clear = Delete all stash`
+
+---
+
+# 19. Remote
+
+```bash
+git remote -v
+```
+
+**Use:** Check connected remote repositories.
+
+Usually the remote name is:
+
+```text
+origin
+```
+
+🧠 **Remember:**
+`remote = Online repository connection`
+
+---
+
+# 20. Clone
+
+```bash
+git clone <repository-url>
+```
+
+**Use:** Copy an existing GitHub repository to your computer.
+
+🧠 **Remember:**
+
+**GitHub → Computer = Clone**
+
+---
+
+# 21. Fetch ⭐
+
+```bash
+git fetch
+```
+
+**Use:** Get information about new remote changes without automatically merging them into your current branch.
+
+🧠 **Remember:**
+
+**Fetch = Check/Get remote updates**
+
+---
+
+# 22. Pull ⭐
+
+```bash
+git pull
+```
+
+**Use:** Get remote changes and integrate them into your current branch.
+
+Simple idea:
+
+```text
+git pull
+   =
+fetch + integrate
+```
+
+🧠 **Remember:**
+
+**Pull = Bring changes into my branch**
+
+---
+
+# 23. Push ⭐
+
+```bash
+git push
+```
+
+**Use:** Send your local commits to the remote repository.
+
+🧠 **Remember:**
+
+**Local → GitHub = Push**
+
+---
+
+# 24. First Push with `-u`
+
+```bash
+git push -u origin main
+```
+
+**Use:** Push `main` to GitHub and set the upstream/tracking connection.
+
+After that:
+
+```bash
+git push
+```
+
+is usually enough.
+
+You can also use:
+
+```bash
+git push origin main
+```
+
+🧠 **Remember:**
+
+`-u` = **Link local branch with remote branch**
+
+---
+
+# 25. Fetch vs Pull vs Push ⭐⭐⭐
+
+| Command     | Simple meaning                 |
+| ----------- | ------------------------------ |
+| `git fetch` | Get remote information         |
+| `git pull`  | Get + integrate remote changes |
+| `git push`  | Send local commits to remote   |
+
+### Super easy:
+
+```text
+FETCH = Get information 👀
+PULL  = Bring changes 📥
+PUSH  = Send changes 📤
+```
+
+---
+
+# 26. Fetch + Manual Merge
+
+```bash
+git fetch origin
+```
+
+Then:
+
+```bash
+git log --oneline --graph --all
+```
+
+Then:
+
+```bash
+git merge origin/main
+```
+
+**Use:** Get remote changes first, inspect them, then manually merge them.
+
+🧠 **Remember:**
+
+**Fetch → Check → Merge**
+
+---
+
+# 27. Revert
+
+```bash
+git revert <commit-id>
+```
+
+**Use:** Undo the effect of a previous commit by creating a **new commit**.
+
+🧠 **Remember:**
+
+**Revert = Undo with a new commit**
+
+---
+
+# 28. Reset
+
+### Soft reset
+
+```bash
+git reset --soft HEAD~1
+```
+
+**Use:** Move back one commit while keeping changes staged.
+
+### Mixed reset
+
+```bash
+git reset --mixed HEAD~1
+```
+
+**Use:** Move back one commit and keep changes in the working directory, but unstaged.
+
+### Hard reset
+
+```bash
+git reset --hard HEAD~1
+```
+
+**Use:** Move back one commit and discard uncommitted changes.
+
+⚠️ Be very careful with `--hard`.
+
+🧠 **Remember:**
+
+**Revert = Safe undo with new commit**
+**Reset = Move history back**
+
+---
+
+# 29. Delete Branch
+
+### Normal delete
+
+```bash
+git branch -d feature/navbar
+```
+
+**Use:** Delete a local branch, normally after it has been merged.
+
+🧠 `-d = delete`
+
+### Force delete
+
+```bash
+git branch -D feature/navbar
+```
+
+**Use:** Force delete a branch even if it has unmerged work.
+
+⚠️ Use carefully.
+
+🧠 `-D = Force delete`
+
+---
+
+# ⭐ COMPLETE GIT FLOW
+
+When working on a new feature:
+
+```text
+git switch main
+        ↓
+git pull
+        ↓
+git switch -c feature/navbar
+        ↓
+Write code
+        ↓
+git status
+        ↓
+git add .
+        ↓
+git commit -m "Add navbar"
+        ↓
+git push -u origin feature/navbar
+        ↓
+Merge feature into main
+        ↓
+git switch main
+        ↓
+git pull
+        ↓
+git merge feature/navbar
+        ↓
+git push
+        ↓
+git branch -d feature/navbar
+```
+
+# 🧠 FINAL MEMORY SHEET
+
+```text
+git --version
+→ Check Git version
+
+git init
+→ Start Git
+
+git status
+→ Check what changed
+
+git add .
+→ Prepare changes
+
+git commit -m "message"
+→ Save checkpoint
+
+git log
+→ See history
+
+git log --oneline
+→ Short history
+
+git log --oneline --graph --all
+→ See branch/commit graph
+
+git branch
+→ See branches
+
+git branch name
+→ Create branch
+
+git switch name
+→ Change branch
+
+git switch -c name
+→ Create + change branch
+
+git merge name
+→ Combine branch
+
+git rebase main
+→ Put work on latest main
+
+git stash
+→ Keep unfinished work aside
+
+git stash pop
+→ Bring it back + remove stash
+
+git stash apply
+→ Bring it back + keep stash
+
+git stash clear
+→ Delete all stashes
+
+git remote -v
+→ Check remote
+
+git clone URL
+→ GitHub → Computer
+
+git fetch
+→ Get remote information
+
+git pull
+→ Get + integrate remote changes
+
+git push
+→ Local → GitHub
+
+git push -u origin main
+→ First push + link branches
+
+git revert ID
+→ Undo with new commit
+
+git reset
+→ Move history back
+
+git branch -d name
+→ Delete branch
+
+git branch -D name
+→ Force delete branch
+```
+
+### 🔥 Sabse important 10 commands
+
+Agar abhi beginner ho, **pehle ye 10 pakke karo**:
+
+```bash
+git status
+git add .
+git commit -m "message"
+git branch
+git switch main
+git switch -c feature/name
+git merge feature/name
+git pull
+git push
+git fetch
+```
+
+**One-line memory:**
+
+> **STATUS → ADD → COMMIT → BRANCH → SWITCH → MERGE → PULL → PUSH**.
